@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlise';
-import { getContacts, getFilter } from '../../redux/selectors';
+import { deleteContact } from 'redux/contactsSlise';
+import { getContacts, getFilter } from 'redux/selectors';
 import cl from '../ContactForm/ContactForm.module.css'
 
 const ContactList = () => {
@@ -13,7 +13,7 @@ const ContactList = () => {
     dispatch(deleteContact(id));
   };
 
- const getFilteredContacts = () => {
+  const getFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter((contact) =>
@@ -22,18 +22,23 @@ const ContactList = () => {
   };
 
   const filteredContacts = getFilteredContacts();
-
   return (
-    <div>
-      <ul>
+   <div>
+            <ul>
         {filteredContacts.map((contact) => (
-          <li key={contact.id}>
-            {contact.name}, {contact.number}
-            <button className={cl.text__Button} type="button" onClick={() => handleDelete(contact.id)}>Remove</button>
+          <li  key={contact.id}>
+            {contact.name}: <br />
+            {contact.number}
+            <button
+              className={cl.text__Button}
+              onClick={() => handleDelete(contact.id)}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
-    </div>
+        </div>
   );
 };
 
